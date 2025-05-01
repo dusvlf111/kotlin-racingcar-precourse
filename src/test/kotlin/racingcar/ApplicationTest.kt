@@ -27,6 +27,33 @@ class ApplicationTest : NsTest() {
         }
     }
 
+    @Test
+    fun `입력값 유효성 검증 테스트 - 빈 이름`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> {
+                runException("pobi,,woni", "1")
+            }
+        }
+    }
+
+    @Test
+    fun `입력값 유효성 검증 테스트 - 시도 횟수 0`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> {
+                runException("pobi,woni", "0")
+            }
+        }
+    }
+
+    @Test
+    fun `입력값 유효성 검증 테스트 - 잘못된 시도 횟수`() {
+        assertSimpleTest {
+            assertThrows<IllegalArgumentException> {
+                runException("pobi,woni", "abc")
+            }
+        }
+    }
+
     override fun runMain() {
         main()
     }
